@@ -5,4 +5,6 @@ import com.mr.service.common.IBaseDBService;
 
 public interface IMyCarService extends IBaseDBService<MyCar> {
     MyCar getByLicensePlate(String licensePlate);
+
+    MyCar getByCustomerId(Integer customerId);
 }

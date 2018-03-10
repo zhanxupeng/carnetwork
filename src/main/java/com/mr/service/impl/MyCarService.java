@@ -12,4 +12,9 @@ public class MyCarService extends BaseDBService<MyCarMapper, MyCar> implements I
     public MyCar getByLicensePlate(String licensePlate) {
         return getRepo().getByLicensePlate(licensePlate);
     }
+
+    @Override
+    public MyCar getByCustomerId(Integer customerId) {
+        return getRepo().getByCustomerId(customerId);
+    }
 }

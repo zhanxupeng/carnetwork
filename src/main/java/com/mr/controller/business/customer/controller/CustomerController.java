@@ -60,10 +60,12 @@ public class CustomerController extends BaseController {
 
     private void saveCustomer(RegisterPM registerPM, Integer myCarId) {
         Customer customer = new Customer();
+        customer.init();
         customer.setUserName(registerPM.getUserName());
         customer.setNickName(registerPM.getNickName());
         customer.setPassword(registerPM.getPassword());
         customer.setSex(registerPM.getSex());
+        customer.setMyCarId(myCarId);
         customerService.insert(customer);
     }
 
@@ -77,6 +79,7 @@ public class CustomerController extends BaseController {
 
     @ExceptionHandler({Exception.class})
     public Response exception(Exception e) {
+        e.printStackTrace();
         return fail("-1", e.getMessage());
     }
 }

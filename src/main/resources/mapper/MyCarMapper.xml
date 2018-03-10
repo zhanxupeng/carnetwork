@@ -135,4 +135,14 @@
         FROM my_car
         WHERE license_plate = #{licensePlate}
     </select>
+
+    <select id="getByCustomerId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM my_car
+        WHERE id IN (
+        SELECT my_car_id
+        FROM customer c WHERE c.id=#{customerId}
+        )
+    </select>
 </mapper>

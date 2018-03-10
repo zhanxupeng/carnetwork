@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MyCarMapper extends BaseMapper<MyCar> {
     MyCar getByLicensePlate(@Param("licensePlate") String licensePlate);
+
+    MyCar getByCustomerId(@Param("customerId") Integer customerId);
 }
