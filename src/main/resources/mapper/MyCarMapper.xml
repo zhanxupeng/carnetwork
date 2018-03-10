@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mr.repo.MyCarMapper" >
-  <resultMap id="BaseResultMap" type="com.mr.entity.MyCar" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="license_plate" property="licensePlate" jdbcType="VARCHAR" />
-    <result column="business" property="business" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="VARCHAR" />
-    <result column="car_body" property="carBody" jdbcType="VARCHAR" />
-    <result column="output" property="output" jdbcType="VARCHAR" />
-    <result column="buy_time" property="buyTime" jdbcType="TIMESTAMP" />
-    <result column="photo" property="photo" jdbcType="VARCHAR" />
-    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
-    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.mr.repo.MyCarMapper">
+    <resultMap id="BaseResultMap" type="com.mr.entity.MyCar">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="license_plate" property="licensePlate" jdbcType="VARCHAR"/>
+        <result column="business" property="business" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="VARCHAR"/>
+        <result column="car_body" property="carBody" jdbcType="VARCHAR"/>
+        <result column="output" property="output" jdbcType="VARCHAR"/>
+        <result column="buy_time" property="buyTime" jdbcType="TIMESTAMP"/>
+        <result column="photo" property="photo" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
       id,
       license_plate,
       business,
@@ -35,22 +35,22 @@
       del_flag
   </sql>
 
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-      select
-      <include refid="Base_Column_List" />
-      from my_car
-      where id = #{id,jdbcType=INTEGER}
-  </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from my_car
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 
-  <delete id="delete" parameterType="java.lang.Integer" >
-      delete from my_car
-      where id IN
-      <foreach collection="list" open="(" close=")" separator="," item="id">
-          #{id}
-      </foreach>
-  </delete>
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from my_car
+        where id IN
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 
-  <insert id="insert" parameterType="com.mr.entity.MyCar" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.mr.entity.MyCar" useGeneratedKeys="true" keyProperty="id">
       insert into my_car (
       id,
       license_plate,
@@ -83,49 +83,56 @@
       #{delFlag,jdbcType=VARCHAR})
   </insert>
 
-  <update id="update" parameterType="com.mr.entity.MyCar" >
-    update my_car
-    <set >
-      <if test="licensePlate != null" >
-        license_plate = #{licensePlate,jdbcType=VARCHAR},
-      </if>
-      <if test="business != null" >
-        business = #{business,jdbcType=VARCHAR},
-      </if>
-      <if test="level != null" >
-        `level` = #{level,jdbcType=VARCHAR},
-      </if>
-      <if test="carBody != null" >
-        car_body = #{carBody,jdbcType=VARCHAR},
-      </if>
-      <if test="output != null" >
-        `output` = #{output,jdbcType=VARCHAR},
-      </if>
-      <if test="buyTime != null" >
-        buy_time = #{buyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="photo != null" >
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null" >
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="createBy != null" >
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null" >
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="delFlag != null" >
-        del_flag = #{delFlag,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <update id="update" parameterType="com.mr.entity.MyCar">
+        update my_car
+        <set>
+            <if test="licensePlate != null">
+                license_plate = #{licensePlate,jdbcType=VARCHAR},
+            </if>
+            <if test="business != null">
+                business = #{business,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                `level` = #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="carBody != null">
+                car_body = #{carBody,jdbcType=VARCHAR},
+            </if>
+            <if test="output != null">
+                `output` = #{output,jdbcType=VARCHAR},
+            </if>
+            <if test="buyTime != null">
+                buy_time = #{buyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="photo != null">
+                photo = #{photo,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getByLicensePlate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM my_car
+        WHERE license_plate = #{licensePlate}
+    </select>
 </mapper>

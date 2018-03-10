@@ -20,6 +20,7 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
         <result column="del_flag" property="delFlag" jdbcType="TINYINT"/>
+        <result column="my_car_id" property="myCarId" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -40,7 +41,8 @@
         create_date,
         update_by,
         update_date,
-        del_flag
+        del_flag,
+        my_car_id
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -76,7 +78,8 @@
       create_date,
       update_by,
       update_date,
-      del_flag
+      del_flag,
+      my_car_id
       )values (
       #{id,jdbcType=INTEGER},
       #{userName,jdbcType=VARCHAR},
@@ -95,7 +98,9 @@
       #{createDate,jdbcType=TIMESTAMP},
       #{updateBy,jdbcType=VARCHAR},
       #{updateDate,jdbcType=TIMESTAMP},
-      #{delFlag,jdbcType=TINYINT})
+      #{delFlag,jdbcType=TINYINT},
+      #{myCarId,jdbcType=INTEGER}
+      )
     </insert>
 
     <update id="update" parameterType="com.mr.entity.Customer">
@@ -155,4 +160,19 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="getByUserName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM customer
+        WHERE user_name = #{userName}
+    </select>
+
+    <select id="getByUserNamePassword" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM customer
+        WHERE user_name = #{userName}
+        AND password = #{password}
+    </select>
 </mapper>

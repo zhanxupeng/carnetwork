@@ -1,15 +1,13 @@
-package com.mr.entity;
+package com.mr.controller.business.customer.view;
 
-import com.mr.common.base.BaseModel;
+import com.mr.entity.Customer;
 
 import java.util.Date;
 
-public class Customer extends BaseModel {
+public class MyInformationVM {
     private String userName;
 
     private String nickName;
-
-    private String password;
 
     private String headPicture;
 
@@ -26,8 +24,17 @@ public class Customer extends BaseModel {
     private Date latestLoginDate;
 
     private Integer continueActiveCount;
-
-    private Integer myCarId;
+    public MyInformationVM(Customer customer){
+        this.userName=customer.getUserName();
+        this.nickName=customer.getNickName();
+        this.headPicture=customer.getHeadPicture();
+        this.sex=customer.getSex();
+        this.city=customer.getCity();
+        this.autograph=customer.getAutograph();
+        this.activeValue=customer.getActiveValue();
+        this.latestActiveDate=customer.getLatestActiveDate();
+        this.latestLoginDate=customer.getLatestLoginDate();
+    }
 
     public String getUserName() {
         return userName;
@@ -43,14 +50,6 @@ public class Customer extends BaseModel {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getHeadPicture() {
@@ -115,13 +114,5 @@ public class Customer extends BaseModel {
 
     public void setContinueActiveCount(Integer continueActiveCount) {
         this.continueActiveCount = continueActiveCount;
-    }
-
-    public Integer getMyCarId() {
-        return myCarId;
-    }
-
-    public void setMyCarId(Integer myCarId) {
-        this.myCarId = myCarId;
     }
 }
