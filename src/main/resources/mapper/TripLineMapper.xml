@@ -84,7 +84,7 @@
         latitude = #{latitude,jdbcType=DECIMAL},
       </if>
       <if test="currentTime != null" >
-        current_time = #{currentTime,jdbcType=TIMESTAMP},
+        `current_time` = #{currentTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remarks != null" >
         remarks = #{remarks,jdbcType=VARCHAR},
@@ -107,4 +107,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getByMyTripId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM trip_line
+    WHERE my_trip_id = #{myTripId}
+    ORDER BY `current_time`
+  </select>
 </mapper>
