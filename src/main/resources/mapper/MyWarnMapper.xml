@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mr.repo.MyWarnMapper" >
+  <resultMap id="BaseResultMap" type="com.mr.entity.MyWarn" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="warn_type" property="warnType" jdbcType="TINYINT" />
+    <result column="my_car_id" property="myCarId" jdbcType="INTEGER" />
+    <result column="my_trip_id" property="myTripId" jdbcType="INTEGER" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="current_time" property="currentTime" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id,
+    warn_type,
+    my_car_id,
+    my_trip_id,
+    longitude,
+    latitude,
+    `current_time`,
+    remarks,
+    create_by,
+    create_date,
+    update_by,
+    update_date,
+    del_flag
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_warn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from my_warn
+    where id IN
+    <foreach collection="list" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.mr.entity.MyWarn" useGeneratedKeys="true" keyProperty="id">
+    insert into my_warn (
+    id,
+    warn_type,
+    my_car_id,
+      my_trip_id,
+      longitude,
+      latitude,
+      `current_time`,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag
+      )values (
+      #{id,jdbcType=INTEGER},
+      #{warnType,jdbcType=TINYINT},
+      #{myCarId,jdbcType=INTEGER},
+      #{myTripId,jdbcType=INTEGER},
+      #{longitude,jdbcType=DECIMAL},
+      #{latitude,jdbcType=DECIMAL},
+      #{currentTime,jdbcType=TIMESTAMP},
+      #{remarks,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP},
+      #{delFlag,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="update" parameterType="com.mr.entity.MyWarn" >
+    update my_warn
+    <set >
+      <if test="warnType != null" >
+        warn_type = #{warnType,jdbcType=TINYINT},
+      </if>
+      <if test="myCarId != null" >
+        my_car_id = #{myCarId,jdbcType=INTEGER},
+      </if>
+      <if test="myTripId != null" >
+        my_trip_id = #{myTripId,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTime != null" >
+        `current_time` = #{currentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

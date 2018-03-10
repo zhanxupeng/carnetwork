@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mr.repo.MyOverSpeedMapper" >
+  <resultMap id="BaseResultMap" type="com.mr.entity.MyOverSpeed" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="my_car_id" property="myCarId" jdbcType="INTEGER" />
+    <result column="my_trip_id" property="myTripId" jdbcType="INTEGER" />
+    <result column="speed" property="speed" jdbcType="DECIMAL" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="CURRENT_TIME" property="currentTime" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,
+    my_car_id,
+    my_trip_id,
+    speed,
+    longitude,
+    latitude,
+    `CURRENT_TIME`,
+    remarks,
+    create_by,
+    create_date,
+    update_by,
+    update_date,
+    del_flag
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from my_overspeed
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from my_overspeed
+    where id IN
+    <foreach collection="list" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.mr.entity.MyOverSpeed" useGeneratedKeys="true" keyProperty="id">
+    insert into my_overspeed (
+    id,
+    my_car_id,
+    my_trip_id,
+      speed,
+      longitude,
+      latitude,
+      `CURRENT_TIME`,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag
+      )values (
+      #{id,jdbcType=INTEGER},
+      #{myCarId,jdbcType=INTEGER},
+      #{myTripId,jdbcType=INTEGER},
+      #{speed,jdbcType=DECIMAL},
+      #{longitude,jdbcType=DECIMAL},
+      #{latitude,jdbcType=DECIMAL},
+      #{currentTime,jdbcType=TIMESTAMP},
+      #{remarks,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP},
+      #{delFlag,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="update" parameterType="com.mr.entity.MyOverSpeed" >
+    update my_overspeed
+    <set >
+      <if test="myCarId != null" >
+        my_car_id = #{myCarId,jdbcType=INTEGER},
+      </if>
+      <if test="myTripId != null" >
+        my_trip_id = #{myTripId,jdbcType=INTEGER},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=DECIMAL},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="currentTime != null" >
+        `CURRENT_TIME` = #{currentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
