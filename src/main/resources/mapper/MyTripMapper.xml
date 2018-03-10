@@ -134,4 +134,16 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getByCustomerId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM my_trip
+    WHERE my_car_id IN (
+    SELECT my_car_id
+    FROM customer
+    WHERE id = #{customerId}
+    )
+    ORDER BY create_date DESC
+  </select>
 </mapper>
